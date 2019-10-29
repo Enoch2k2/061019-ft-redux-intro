@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { addPet } from '../actions';
 
 export class PetNew extends Component {
 
@@ -21,6 +23,7 @@ export class PetNew extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // add the pet
+    console.log('handle submit')
     this.props.addPet( this.state );
     // redirect to /pets
     this.props.history.push('/pets');
@@ -49,4 +52,11 @@ export class PetNew extends Component {
   }
 }
 
-export default PetNew
+const mapDispatchToProps = dispatch => {
+  console.log('mapDispatchToProps');
+  return {
+    addPet: pet => dispatch(addPet(pet))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PetNew);
